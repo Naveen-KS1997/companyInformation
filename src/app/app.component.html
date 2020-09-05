@@ -1,0 +1,44 @@
+
+
+<form [formGroup]="myForm">
+  <div formArrayName="companies">
+    <div *ngFor="let comp of myForm.get('companies').controls; let i=index">
+    <h3>COMPANY {{i+1}}: </h3>
+    <div [formGroupName]="i">
+      <label>company: </label>
+      <input formControlName="company" />
+      <label>location: </label>
+      <input formControlName="location" />    
+        <label>country: </label>
+      <input formControlName="country" />
+
+      <div formArrayName="employees">
+        <div *ngFor="let employee of comp.get('employees').controls; let j=index">
+          <h4>employee {{j+1}}</h4>
+          <div [formGroupName]="j">
+            <label>employee Name: </label>
+            <input formControlName="employeeName" />
+            <label>contact Number: </label>
+            <input formControlName="contactNumber" />
+            <label>salary: </label>
+            <input formControlName="salary" />
+
+            
+            <button (click)="deleteEmployee(comp.controls.employees, j)">
+              Remove employee
+            </button>
+          </div>
+        </div>
+        <button (click)="addNewEmployee(comp.controls.employees)">
+          Add new employee
+        </button>
+        <button (click)="save()">
+          save
+         </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+</form>
